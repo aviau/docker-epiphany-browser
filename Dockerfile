@@ -4,7 +4,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         locales \
         epiphany-browser && \
-        libgl1-mesa-dri && \
     dpkg-reconfigure locales && \
     locale-gen C.UTF-8 && \
     /usr/sbin/update-locale LANG=C.UTF-8 && \
@@ -13,6 +12,12 @@ RUN apt-get update && \
     apt purge locales -y && \
     apt autoremove -y && \
     apt clean
+
+RUN apt-get update && \
+    apt-get install -y libgl1-mesa-dri
+
+RUN apt-get update && \
+    apt-get install -y ca-certificates
 
 ENV LC_ALL C.UTF-8
 ENV LANG en_CA.UTF-8
